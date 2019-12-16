@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    bus:
+      trace:
+        enable: true
+    config:
+      server:
+        git:
+          uri: https://github.com/flower-wzh/first.git #git仓库地址
+      label: master #仓库的分支
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka

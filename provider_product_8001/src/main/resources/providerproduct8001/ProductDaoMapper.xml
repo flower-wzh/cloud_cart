@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzh.provider_product_8001.dao.ProductInfoDao">
+    <resultMap id="BaseResultMap" type="ProductCategory">
+        <id column="cid" property="categoryId"></id>
+        <result column="cname" property="categoryName"></result>
+        <result column="ctype" property="categoryType"></result>
+        <result column="cCreateTime" property="createTime"></result>
+        <result column="cUpdateTime" property="updateTime"></result>
+        <collection property="productInfos" ofType="ProductInfo">
+            <id column="pId" property="productId"></id>
+            <result column="pName" property="prodcutName"></result>
+            <result column="pPrice" property="productPrice"></result>
+            <result column="pStock" property="productStock"></result>
+            <result column="pDescription" property="productDescription"></result>
+            <result column="pIcon" property="productIcon"></result>
+            <result column="pType" property="categoryType"></result>
+            <result column="pCreateTime" property="createTime"></result>
+            <result column="pUpdateTime" property="updateTime"></result>
+        </collection>
+    </resultMap>
+    
+    <select id="findAllProducts" resultMap="BaseResultMap">
+        select
+        pc.category_id cid,pc.category_name cname,pc.category_type ctype,
+        pc.create_time cCreateTime,pc.update_time cUpdateTime,
+        pi.product_id pId, pi.prodcut_name pName, pi.product_price pPrice,
+        pi.product_stock pStock, pi.product_description pDescription,
+        pi.product_icon pIcon, pi.category_type pType, pi.create_time pCreateTime, pi.update_time pUpdateTime
+        from product_category pc left JOIN product_info pi
+        on pc.category_type=pi.category_type
+    </select>
+
+
+</mapper>
